@@ -15,7 +15,7 @@ Vagrant.configure("2") do |config|
         worker.vm.provision "ansible" do |ansible|
           ansible.force_remote_user = true
           ansible.galaxy_role_file = "requirements.yml"
-          ansible.playbook="install.yaml"
+          ansible.playbook="playbook.yaml"
           ansible.groups = { 
             "microk8s_group_HA" => ["worker-[1:3]"],
           }
