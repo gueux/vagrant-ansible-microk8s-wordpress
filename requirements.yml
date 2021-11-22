@@ -1,0 +1,6 @@
+collections:
+  - name: community.kubernetes
+
+roles:
+  - src: istvano.microk8s
+    name: microk8s

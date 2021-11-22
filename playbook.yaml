@@ -1,0 +1,25 @@
+- name: install microk8s on top of linux host
+  hosts: all
+  remote_user: root
+  roles:
+    - role: microk8s
+      vars:
+        microk8s_plugins:
+          ingress: true
+
+- name: install microk8s on top of linux host
+  hosts: worker-1
+  remote_user: root
+  tasks:
+    - name: add bitnami helm charts repo
+      community.kubernetes.helm_repository:
+        name: bitnami
+        repo_url: https://charts.bitnami.com/bitnami
+
+    - name: deploy latest version of wordpress chart
+      community.kubernetes.helm:
+        name: wordpress
+        chart_ref: bitnami/wordpress
+        release_namespace: wordpress
+        values:
+          replicaCount: 3
